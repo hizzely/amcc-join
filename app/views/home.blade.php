@@ -1,3 +1,13 @@
+<?php
+$date=date_create("2018-10-08");
+$date = date_format($date,"Y/m/d");
+$now = date("Y/m/d");
+if ($now < $date) {
+  echo "<script type='text/javascript'>window.location = 'soon'</script>";
+}
+ ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +53,7 @@
               </div>
             </div> --}}
 
-            @if ($helper->getSettings()['announcement'])
+            @if (isset($helper->getSettings()['announcement']) && $helper->getSettings()['announcement'] != "")
               <div class="alert alert-info" role="alert">
                 {!! $helper->getSettings()['announcement'] !!}
               </div>
@@ -59,7 +69,7 @@
             <div class="form-group row">
               <label for="nim" class="col-sm-3 col-form-label">NIM</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" id="nim" name="nim" placeholder="Contoh: 14.11.9999" required data-parsley-remote="http://amikom-dispatch.rizqy.me/mahasiswa/{value}" data-parsley-group="nim">
+                <input class="form-control" type="text" id="nim" name="nim" placeholder="Contoh: 18.12.0000" required data-parsley-remote="http://amikom-dispatch.rizqy.me/mahasiswa/{value}" data-parsley-group="nim">
               </div>
             </div>
             <div class="form-group row">
@@ -142,4 +152,3 @@
   <script src="assets/js/app.js"></script>
 </body>
 </html>
-

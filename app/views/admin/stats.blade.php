@@ -6,7 +6,7 @@
     <div class="col-sm-4">
       <div class="card card-outline-secondary text-xs-center">
         <div class="card-header">Total Pendaftar</div>
-        <div class="card-block">
+        <div class="card-block text-center">
           <h2>{{ $stats['registered'] }}</h2>
         </div>
       </div>
@@ -53,21 +53,23 @@
     var divisionsChart = new Chart($('#divisions-chart'), {
       type: 'bar',
       data: {
-        labels: ['Web', 'Desktop', 'Hardsoft', 'Network'],
+        labels: ['Web', 'Desktop', 'Hardsoft', 'Network', 'Mobile'],
         datasets: [
           {
-            data: [{{$stats['divisions']['web']}}, {{$stats['divisions']['desktop']}}, {{$stats['divisions']['hardware']}}, {{$stats['divisions']['network']}}],
+            data: [{{$stats['divisions']['web']}}, {{$stats['divisions']['desktop']}}, {{$stats['divisions']['hardware']}}, {{$stats['divisions']['network']}}, {{$stats['divisions']['mobile']}}],
             backgroundColor: [
               'rgba(255, 99, 132, 0.8)',
               'rgba(75, 192, 192, 0.8)',
               'rgba(153, 102, 255, 0.8)',
-              'rgba(255, 159, 64, 0.8)'
+              'rgba(255, 159, 64, 0.8)',
+              'rgba(64, 255, 215, 0.8)'
             ],
             hoverBackgroundColor: [
               'rgba(255,99,132,1)',
               'rgba(75, 192, 192, 1)',
               'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 159, 64, 1)',
+              'rgba(64, 255, 215, 1)'
             ]
           }
         ]
@@ -78,6 +80,6 @@
         }
       }
     });
-  } );
+  });
 </script>
 @endpush

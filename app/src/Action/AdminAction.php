@@ -3,6 +3,7 @@ namespace App\Action;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Illuminate\Support\Facades\DB;
 
 class AdminAction extends BaseAction
 {
@@ -21,7 +22,7 @@ class AdminAction extends BaseAction
         $stats['paid']       = $this->db->count('member', ['status' => 1]);
         $stats['unpaid']     = $this->db->count('member', ['status' => 0]);
 
-        foreach (['web', 'desktop', 'hardware', 'network'] as $divisi) {
+        foreach (['web', 'desktop', 'hardware', 'network','mobile'] as $divisi) {
             $stats['divisions'][$divisi] = $this->db->count('member', ['divisi' => $divisi]);
         }
 

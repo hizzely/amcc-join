@@ -18,5 +18,6 @@ $app->group('/admin', function () {
 	$this->get('/', 'App\Action\AdminAction:home')->setName('admin')->add(App\Middlewares\AuthMiddleware::class);
 });
 
+$app->get('/soon', 'App\Action\HomeAction:soon')->setName('soon');
 $app->get('/', 'App\Action\HomeAction:home')->setName('home')->add($app->getContainer()->get('csrf'));
 $app->post('/', 'App\Action\HomeAction:register')->add($app->getContainer()->get('csrf'))->add('App\Middlewares\CheckRegisteredMiddleware:run');

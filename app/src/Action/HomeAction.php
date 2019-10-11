@@ -19,9 +19,21 @@ class HomeAction extends BaseAction
         return $response;
     }
 
+    public function soon(Request $request, Response $response)
+    {
+      $csrf = [
+          'name'  => $request->getAttribute('csrf_name'),
+          'value' => $request->getAttribute('csrf_value')
+      ];
+
+      $this->view->render($response, 'soon', compact('csrf'));
+
+      return $response;
+    }
+
     public function register(Request $request, Response $response)
     {
-        $data = array_map('htmlspecialchars', $request->getParsedBody());
+        $data = $request->getParsedBody();
 
         $id = $this->db->insert('member', [
             'nim'          => $data['nim'],
