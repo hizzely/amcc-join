@@ -66,6 +66,6 @@ class AdminAction extends BaseAction
         unset($_SESSION['admin_id']);
         session_destroy();
 
-        return $response->withHeader('Location', $this->router->pathFor('admin'));
+        return $response->withHeader('Location', $this->router->pathFor('admin.login'));
     }
 }

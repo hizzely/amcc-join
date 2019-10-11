@@ -31,14 +31,14 @@ class MemberAction extends BaseAction
 
         $dt->query("SELECT nim, nama, email, noHp, divisi, noReg, status FROM member");
 
-        $dt->edit('aksi', function($row) {
+        $dt->add('aksi', function($row) {
             $editBtn = '<button type="button" class="btn btn-info btn-sm" data-nim="'.$row['nim'].'" data-status="'.$row['status'].'" data-reg="'.$row['noReg'].'" data-nama="'.$row['nama'].'" data-toggle="modal" data-target="#edit-member-modal"><i class="ion-edit"></i></button>';
             $deleteBtn = '<button type="button" class="btn btn-danger btn-sm btn-delete-member" data-nim="'.$row['nim'].'" data-nama="'.$row['nama'].'"><i class="ion-trash-a"></i></button>';
 
             return "$editBtn $deleteBtn";
         });
 
-        return $response->withJson($dt->generate(false));
+        return $response->withJson($dt->generate()->toArray());
     }
 
     public function editData(Request $request, Response $response)
@@ -52,6 +52,10 @@ class MemberAction extends BaseAction
                 'status' => 'error',
                 'message' => 'Data tidak ditemukan.'
             ], 404);
+        }
+
+        if (!array_key_exists('status', $data)) {
+            $data['status'] = 0;
         }
 
         $this->db->update('member', [

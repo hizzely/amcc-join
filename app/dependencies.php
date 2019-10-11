@@ -1,4 +1,7 @@
 <?php
+
+use Medoo\Medoo;
+
 // DIC configuration
 
 $container = $app->getContainer();
@@ -9,7 +12,7 @@ $container = $app->getContainer();
 
 // Medoo
 $container['db'] = function ($c) {
-    $db = new medoo([
+    $db = new Medoo([
         'database_type' => 'mysql',
         'database_name' => getenv('DB_NAME'),
         'server'        => getenv('DB_HOST'),

@@ -3,14 +3,15 @@ namespace App\Action;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ExportAction extends BaseAction
 {
 
     public function export(Request $request, Response $response)
     {
-        $excel = new \PHPExcel;
-        $writer = \PHPExcel_IOFactory::createWriter($excel, "Excel2007");
+        $excel = new Spreadsheet();
         $sheet = $excel->getActiveSheet();
         $sheet->getCell('A1')->setValue('NIM');
         $sheet->getCell('B1')->setValue('Nama');
@@ -42,7 +43,8 @@ class ExportAction extends BaseAction
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="'.$filename.'.xlsx"');
         header('Cache-Control: max-age=0');
-
+        
+        $writer = new Xlsx($excel);
         $writer->save('php://output');
     }
 }
