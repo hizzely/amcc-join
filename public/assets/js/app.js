@@ -12,18 +12,22 @@ $(window).resize(function(e){
   $('#nim').mask('99.99.9999', {
     completed: function() {
       $('#fullname').val('');
-      $('.user-image .icon').addClass('ion-load-c');
+      validator.validate({group: 'nim'});
 
-      $.get('http://amikom-dispatch.rizqy.me/mahasiswa/' + $('#nim').val())
-        .done(function(response) {
-          $('.user-image').css('background-image', 'url('+response.image+')');
-          $('.user-image .icon').hide();
-          $('#fullname').val(response.name);
-        })
-        .always(function() {
-          $('.user-image .icon').removeClass('ion-load-c');
-          validator.validate({group: 'nim'});
-        })
+      // * Disable mahasiswa data autofill
+      //
+      // $('.user-image .icon').addClass('ion-load-c');
+
+      // $.get('http://amikom-dispatch.rizqy.me/mahasiswa/' + $('#nim').val())
+      //   .done(function(response) {
+      //     $('.user-image').css('background-image', 'url('+response.image+')');
+      //     $('.user-image .icon').hide();
+      //     $('#fullname').val(response.name);
+      //   })
+      //   .always(function() {
+      //     $('.user-image .icon').removeClass('ion-load-c');
+      //     validator.validate({group: 'nim'});
+      //   })
     }
   });
 

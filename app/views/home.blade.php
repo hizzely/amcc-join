@@ -69,7 +69,8 @@ if ($now < $date) {
             <div class="form-group row">
               <label for="nim" class="col-sm-3 col-form-label">NIM</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" id="nim" name="nim" placeholder="Contoh: 18.12.0000" required data-parsley-remote="http://amikom-dispatch.rizqy.me/mahasiswa/{value}" data-parsley-group="nim">
+                <!-- <input class="form-control" type="text" id="nim" name="nim" placeholder="Contoh: 19.11.0000" required data-parsley-remote="http://amikom-dispatch.rizqy.me/mahasiswa/{value}" data-parsley-group="nim"> -->
+                <input class="form-control" type="text" id="nim" name="nim" placeholder="Contoh: 19.11.0000" required data-parsley-group="nim">
               </div>
             </div>
             <div class="form-group row">
@@ -107,7 +108,8 @@ if ($now < $date) {
               <div class="col-sm-9">
                 <select name="division" id="division" class="form-control" required>
                   <option value="">- Pilih Divisi -</option>
-                  <option value="web">Web Programming</option>
+                  <option value="web-backend">Web Programming (Backend)</option>
+                  <option value="web-frontend">Web Programming (Frontend)</option>
                   <option value="desktop">Desktop Programming</option>
                   <option value="mobile">Mobile Programming</option>
                   <option value="hardware">Hardware Software</option>
