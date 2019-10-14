@@ -58,10 +58,63 @@ class MemberAction extends BaseAction
             $data['status'] = 0;
         }
 
+        if (!array_key_exists('nota-notify', $data)) {
+            $data['nota-notify'] = 0;
+        }
+
         $this->db->update('member', [
             'noReg'  => $data['noReg'],
             'status' => (int) $data['status']
         ], ['nim' => $data['nim']]);
+        
+        if ($data['status']) {
+            $inserted = $this->db->get('nota', 'hash', ['nim' => $data['nim']]);
+            $nota_hash = '';
+
+            if (!$inserted) {
+                $nota_hash = md5(date('dmYhis') . $member['noReg']);
+
+                $this->db->insert('nota', [
+                    'nim' => $data['nim'],
+                    'penerima' => 'Admin',
+                    'hash' => $nota_hash,
+                    'notified' => $data['nota-notify']
+                ]);
+            } else {
+                $nota_hash = $inserted;
+            }
+
+            if ($data['nota-notify']) {
+                $data = [
+                    'nama' => $member['nama'],
+                    'nim' => $member['nim'],
+                    'link_nota' => getenv('APP_URL') . '/e-nota/' . $nota_hash,
+                ];
+        
+                $this->view->render($response, 'email.nota', compact('data'));
+                $mailContent = $response->getBody()->__toString();
+                $mailSubject = 'Join AMCC @Expo Amikom 2019';
+        
+                $mail = $this->mailer;
+                $mail->setFrom(getenv('SMTP_FROM_EMAIL'), getenv('SMTP_FROM_NAME'));
+                $mail->addAddress($member['email']);
+                $mail->isHTML(true);
+                $mail->Subject = $mailSubject;
+                $mail->Body = $mailContent;
+                
+                try {
+                    $mail->send();
+                    $this->db->update('nota', ['notified'  => 1], ['nim' => $data['nim']]);
+                } catch (Exception $e) {
+                    return $response->withJson([
+                        'status' => 'error',
+                        'message' => $mail->ErrorInfo()
+                    ], 500);
+                }
+            }
+        } else {
+            $this->db->delete('nota', ['nim' => $data['nim']]);
+        }
 
         return $response->withJson([
             'status' => 'ok',
@@ -83,6 +136,7 @@ class MemberAction extends BaseAction
         }
 
         $this->db->delete('member', ['nim' => $data['nim']]);
+        $this->db->delete('nota', ['nim' => $data['nim']]);
 
         return $response->withJson([
             'status' => 'ok',
