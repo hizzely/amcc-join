@@ -1,6 +1,9 @@
 <?php
 
 use Medoo\Medoo;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 // DIC configuration
 
@@ -47,6 +50,21 @@ $container['flash'] = function ($c) {
 // CSRF protection
 $container['csrf'] = function ($c) {
     return new Slim\Csrf\Guard;
+};
+
+// PHPMailer
+$container['mailer'] = function ($c) {
+    $mailer = new PHPMailer(true);
+    //$mailer->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mailer->isSMTP();
+    $mailer->Host       = getenv('SMTP_HOST');
+    $mailer->SMTPAuth   = true;
+    $mailer->Username   = getenv('SMTP_USER');
+    $mailer->Password   = getenv('SMTP_PASS');
+    $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mailer->Port       = getenv('SMTP_PORT');
+    
+    return $mailer;
 };
 
 // -----------------------------------------------------------------------------

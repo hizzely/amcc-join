@@ -15,6 +15,7 @@ class BaseAction
     protected $logger;
     protected $router;
     protected $view;
+    protected $mailer;
 
     public function __construct(ContainerInterface $ci)
     {
@@ -26,5 +27,6 @@ class BaseAction
         $this->logger = $ci->get('logger');
         $this->router = $ci->get('router');
         $this->view   = $ci->get('view');
+        $this->mailer = $ci->get('mailer');
     }
 }
