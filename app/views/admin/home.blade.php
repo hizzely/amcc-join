@@ -61,6 +61,18 @@
               </div>
             </div>
           </div>
+          <div class="form-group row">
+            <label class="col-sm-3">Notifikasi</label>
+            <div class="col-sm-9">
+              <div class="form-check">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input member-nota-notify" name="nota-notify" value="1">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">Kirim Email E-Nota</span>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -120,12 +132,14 @@
       modal.find('.member-nim').text(btn.data('nim'));
       modal.find('.member-reg').val(btn.data('reg'));
       modal.find('.member-status').prop('checked', parseInt(btn.data('status')));
+      modal.find('.member-nota-notify').prop('checked', parseInt(btn.data('nota-notify')));
 
       $('#edit-member-form').submit(function (e) {
         e.preventDefault();
         var $submitBtn = $(this).find("button[type='submit']"),
             url = this.action;
 
+        $submitBtn.text('Mohon Tunggu...');
         $submitBtn.prop('disabled', true);
 
         $.post(url, $(this).serialize())
@@ -137,6 +151,7 @@
             alert('Terjadi kesalahan: '+response.message);
           })
           .always(function() {
+            $submitBtn.text('Simpan');
             $submitBtn.prop('disabled', false);
             memberTable.ajax.reload();
           });
