@@ -3,7 +3,7 @@ namespace App\Action;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Hizzely\Fpdf\FPDF;
+use Fpdf\Fpdf as FPDF;
 
 class NotaAction extends BaseAction
 {
