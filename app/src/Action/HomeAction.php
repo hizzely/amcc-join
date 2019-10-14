@@ -34,6 +34,9 @@ class HomeAction extends BaseAction
     public function register(Request $request, Response $response)
     {
         $data = $request->getParsedBody();
+        $registrationCode = intval($this->db->get('settings', 'value', ['name' => 'registration_code']));
+        $lastRegistrationNumber = $this->db->count('member');
+        $registrationNumber = ($registrationCode + ($lastRegistrationNumber + 1));
 
         $id = $this->db->insert('member', [
             'nim'          => $data['nim'],
@@ -43,7 +46,7 @@ class HomeAction extends BaseAction
             'email'        => $data['email'],
             'nama'         => $data['fullname'],
             'noHp'         => $data['phone'],
-            'noReg'        => 0,
+            'noReg'        => $registrationNumber,
             'status'       => 0
         ]);
 
