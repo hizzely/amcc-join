@@ -17,12 +17,12 @@ class AdminAction extends BaseAction
 
     public function stats(Request $request, Response $response)
     {
-        $stats['member'] = $this->db->select('member', '*');
+        $stats['member']     = $this->db->select('member', 'id');
         $stats['registered'] = $this->db->count('member');
         $stats['paid']       = $this->db->count('member', ['status' => 1]);
         $stats['unpaid']     = $this->db->count('member', ['status' => 0]);
 
-        foreach (['web', 'desktop', 'hardware', 'network','mobile'] as $divisi) {
+        foreach (['web-backend', 'web-frontend', 'desktop', 'hardware', 'network','mobile'] as $divisi) {
             $stats['divisions'][$divisi] = $this->db->count('member', ['divisi' => $divisi]);
         }
 

@@ -53,11 +53,12 @@
     var divisionsChart = new Chart($('#divisions-chart'), {
       type: 'bar',
       data: {
-        labels: ['Web', 'Desktop', 'Hardsoft', 'Network', 'Mobile'],
+        labels: ['WebB', 'WebF', 'Desktop', 'Hardsoft', 'Network', 'Mobile'],
         datasets: [
           {
-            data: [{{$stats['divisions']['web']}}, {{$stats['divisions']['desktop']}}, {{$stats['divisions']['hardware']}}, {{$stats['divisions']['network']}}, {{$stats['divisions']['mobile']}}],
+            data: [{{$stats['divisions']['web-backend']}}, {{$stats['divisions']['web-frontend']}}, {{$stats['divisions']['desktop']}}, {{$stats['divisions']['hardware']}}, {{$stats['divisions']['network']}}, {{$stats['divisions']['mobile']}}],
             backgroundColor: [
+              'rgba(200, 99, 132, 0.8)',
               'rgba(255, 99, 132, 0.8)',
               'rgba(75, 192, 192, 0.8)',
               'rgba(153, 102, 255, 0.8)',
@@ -65,6 +66,7 @@
               'rgba(64, 255, 215, 0.8)'
             ],
             hoverBackgroundColor: [
+              'rgba(200, 99, 132, 0.8)',
               'rgba(255,99,132,1)',
               'rgba(75, 192, 192, 1)',
               'rgba(153, 102, 255, 1)',
