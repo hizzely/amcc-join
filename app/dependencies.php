@@ -92,8 +92,8 @@ $container[App\Middlewares\AuthMiddleware::class] = function ($c) {
     return new App\Middlewares\AuthMiddleware($c);
 };
 
-$container[App\Middlewares\RedirectIfAuthedMiddleware::class] = function ($c) {
-    return new App\Middlewares\RedirectIfAuthedMiddleware($c);
+$container[App\Middlewares\RedirectIfAuthed::class] = function ($c) {
+    return new App\Middlewares\RedirectIfAuthed($c);
 };
 
 $container[App\Middlewares\CheckRegisteredMiddleware::class] = function ($c) {
