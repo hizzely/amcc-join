@@ -1,27 +1,16 @@
-<?php
-$date=date_create("2018-10-08");
-$date = date_format($date,"Y/m/d");
-$now = date("Y/m/d");
-if ($now < $date) {
-  echo "<script type='text/javascript'>window.location = 'soon'</script>";
-}
- ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
   <title>Join AMCC</title>
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
   <div class="container-fluid">
     <div class="row">
@@ -35,7 +24,7 @@ if ($now < $date) {
 
           <ul class="socials hidden-sm-down">
             <li><a href="http://amcc.or.id/"><i class="ion-ios-world-outline"></i> amcc.or.id</a></li>
-            <li><a href="https://www.facebook.com/AmikomComputerClub/"><i class="ion-social-facebook"></i> AmikomComputerClub</a></li>
+            <li><a href="https://www.facebook.com/AmikomComputerClub/"><i class="ion-social-facebook"></i>AmikomComputerClub</a></li>
             <li><a href="https://instagram.com/amccamikom/"><i class="ion-social-instagram-outline"></i> @amccamikom</a></li>
           </ul>
         </div>
@@ -54,9 +43,9 @@ if ($now < $date) {
             </div> --}}
 
             @if (isset($helper->getSettings()['announcement']) && $helper->getSettings()['announcement'] != "")
-              <div class="alert alert-info" role="alert">
-                {!! $helper->getSettings()['announcement'] !!}
-              </div>
+            <div class="alert alert-info" role="alert">
+              {!! $helper->getSettings()['announcement'] !!}
+            </div>
             @endif
 
             @include('partials.notifs')
@@ -100,7 +89,7 @@ if ($now < $date) {
             <div class="form-group row">
               <label for="school" class="col-sm-3 col-form-label">Asal Sekolah</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" id="school" name="school" placeholder="Nama sekolah dan jurusan" required>
+                <input class="form-control" type="text" id="school" name="school" placeholder="Nama sekolah dan jurusan"required>
               </div>
             </div>
             <div class="form-group row">
@@ -130,7 +119,7 @@ if ($now < $date) {
             </div> --}}
             <div class="form-group row">
               <div class="col-sm-6 offset-sm-3 text-xs-center">
-                <button type="submit" class="btn btn-success btn-block"><i class="ion-paper-airplane"></i> Daftar</button><br>
+                <button type="submit" class="btn btn-success btn-block"><i class="ion-paper-airplane"></i>Daftar</button><br>
                 <button type="reset" class="btn btn-outline-danger btn-sm">Reset</button>
               </div>
             </div>
@@ -141,7 +130,7 @@ if ($now < $date) {
       <div class="footer-sm col-xs-12 hidden-md-up">
         <ul class="socials">
           <li><a href="http://amcc.or.id/"><i class="ion-ios-world-outline"></i> amcc.or.id</a></li>
-          <li><a href="https://www.facebook.com/AmikomComputerClub/"><i class="ion-social-facebook"></i> AmikomComputerClub</a></li>
+          <li><a href="https://www.facebook.com/AmikomComputerClub/"><i class="ion-social-facebook"></i>AmikomComputerClub</a></li>
           <li><a href="https://instagram.com/amccamikom/"><i class="ion-social-instagram-outline"></i> @amccamikom</a></li>
         </ul>
       </div>

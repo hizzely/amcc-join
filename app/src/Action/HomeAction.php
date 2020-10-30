@@ -6,9 +6,25 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class HomeAction extends BaseAction
 {
-
     public function home(Request $request, Response $response)
     {
+        $settings = $this->getSettingsData();
+
+        $dateOpen = date_format(date_create($settings["date_open"]), "Y/m/d");
+
+        $dateClosed = date_format(date_create($settings["date_closed"]), "Y/m/d");
+
+        $now = date("Y/m/d");
+
+        if ($now < $dateOpen) {
+            header("Location:" . $this->helper->route("soon"));
+            exit();
+        }
+
+        if ($now > $dateClosed) {
+            die("Pendaftaran telah ditutup! :(");
+        }
+
         $csrf = [
             'name'  => $request->getAttribute('csrf_name'),
             'value' => $request->getAttribute('csrf_value')
@@ -21,14 +37,25 @@ class HomeAction extends BaseAction
 
     public function soon(Request $request, Response $response)
     {
-      $csrf = [
-          'name'  => $request->getAttribute('csrf_name'),
-          'value' => $request->getAttribute('csrf_value')
-      ];
+        $settings = $this->getSettingsData();
 
-      $this->view->render($response, 'soon', compact('csrf'));
+        $dateOpen = date_format(date_create($settings['date_open']), "Y/m/d");
 
-      return $response;
+        $now = date("Y/m/d");
+
+        if ($now >= $dateOpen) {
+            header("Location: /");
+            exit();
+        }
+
+        $csrf = [
+            'name'  => $request->getAttribute('csrf_name'),
+            'value' => $request->getAttribute('csrf_value')
+        ];
+
+        $this->view->render($response, 'soon', compact(['csrf', 'dateOpen']));
+
+        return $response;
     }
 
     public function register(Request $request, Response $response)
@@ -61,5 +88,16 @@ class HomeAction extends BaseAction
         $this->flash->addMessage('success', $this->helper->getSettings()['success_message']);
 
         return $response->withStatus(200)->withHeader('Location', $this->router->pathFor('home'));
+    }
+
+    public function getSettingsData() : array
+    {
+        $settings = $this->db->select('settings', '*');
+
+        foreach ($settings as $setting) {
+            $data[$setting['name']] = $setting['value'];
+        }
+        
+        return $data;
     }
 }
