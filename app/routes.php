@@ -15,7 +15,9 @@ $app->group('/admin', function () {
 
     $this->get('/stats', 'App\Action\AdminAction:stats')->setName('admin.stats')->add(App\Middlewares\AuthMiddleware::class);
     $this->get('/export', 'App\Action\ExportAction:export')->setName('admin.export')->add(App\Middlewares\AuthMiddleware::class);
-	$this->get('/', 'App\Action\AdminAction:home')->setName('admin')->add(App\Middlewares\AuthMiddleware::class);
+    $this->get('/', 'App\Action\AdminAction:home')->setName('admin')->add(App\Middlewares\AuthMiddleware::class);
+    
+    $this->get('/report', 'App\Action\ReportAction:index')->setName('admin.report')->add(App\Middlewares\AuthMiddleware::class);
 });
 
 $app->get('/soon', 'App\Action\HomeAction:soon')->setName('soon');
