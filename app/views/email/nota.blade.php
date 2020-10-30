@@ -377,18 +377,12 @@
                   <div class="heading-section" style="text-align: center; padding: 0 30px;">
                     <p style="color: #000; text-align: justify;">
                       Terima kasih kamu telah memilih AMCC! 
-                      Berikut kami lampirkan tautan <strong>tanda bukti terima pembayaran</strong> registrasi member di Expo Amikom 2019.<br/><br/>
-                      Eits, email ini <strong>jangan dihapus</strong> yah.. karena email ini juga berisi <strong>QR Code</strong> yang dapat kamu gunakan untuk
-                      mengikuti acara seru <strong>first meet</strong> semua member baru AMCC. Sampai jumpa disana, pastikan kamu datang ya!<br/><br/>
+                      Berikut kami lampirkan tautan <strong>tanda bukti terima pembayaran</strong> registrasi member di Expo Amikom.<br/><br/>
+                      Hmm selanjutnya ngapain ya? Ikut <strong>First Meet</strong> dong tentunya! Kapan first meetnya diadakan? pantengin sosmed AMCC ya! Sampai jumpa disana, kami akan sangat senang kalo kamu dateng!<br/><br/>
                     </p>
                     <a href="{{ $data['link_nota'] }}" target="_blank" rel="noreferrer noopener" class="btn btn-primary">Lihat Tanda Bukti Pembayaran</a>
                     <br/><br/>
                   </div>
-                  <br/><hr><br/>
-                  <div class="heading-section" style="text-align: center; padding: 0;">
-		              	<p style="color: #000;">Tunjukkan QR Code ini saat kamu datang ke first meet:</p>
-                    <img src="https://chart.googleapis.com/chart?cht=qr&chs=512x512&chld=H|1&chl={{ $data['nim'] }}" width="100%" height="100%"/>
-		            	</div>
 		            </td>
 		          </tr><!-- end: tr -->
 		        </table>
@@ -500,7 +494,7 @@
                   <tr>
                     <td style="text-align: left; padding-right: 10px; text-align: center;">
                     	<p>
-                        &copy; 2019 Amikom Computer Club. All Rights Reserved.<br/>
+                        &copy; 2020 Amikom Computer Club. All Rights Reserved.<br/>
                       </p>
                     </td>
                   </tr>

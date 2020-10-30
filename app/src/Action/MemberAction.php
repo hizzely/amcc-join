@@ -93,7 +93,7 @@ class MemberAction extends BaseAction
         
                 $this->view->render($response, 'email.nota', compact('data'));
                 $mailContent = $response->getBody()->__toString();
-                $mailSubject = 'Join AMCC @Expo Amikom 2019';
+                $mailSubject = 'Join Amikom Computer Club';
         
                 $mail = $this->mailer;
                 $mail->setFrom(getenv('SMTP_FROM_EMAIL'), getenv('SMTP_FROM_NAME'));
