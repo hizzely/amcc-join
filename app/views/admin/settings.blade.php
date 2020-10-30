@@ -27,6 +27,24 @@
             </div>
           </div>
 
+          <br>
+          <h3>Tanggal Pendaftaran</h3>
+          <hr>
+
+          <div class="form-group row">
+            <label for="date_open" class="col-sm-2 col-form-label">Mulai Dibuka Pada</label>
+            <div class="col-sm-10">
+              <textarea name="date_open" id="date_open" class="form-control" rows="2">{!! $settings['date_open'] !!}</textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="date_closed" class="col-sm-2 col-form-label">Ditutup Pada</label>
+            <div class="col-sm-10">
+              <textarea name="date_closed" id="date_closed" class="form-control" rows="2">{!! $settings['date_closed'] !!}</textarea>
+            </div>
+          </div>
+
           <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
               <button type="submit" class="btn btn-success">Simpan Perubahan</button>
