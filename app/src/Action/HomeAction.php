@@ -77,12 +77,51 @@ class HomeAction extends BaseAction
             'status'       => 0
         ]);
 
-        $inserted = $this->db->get('member', 'nim', ['nim' => $data['nim']]);
+        $inserted = $this->db->get('member', '*', ['nim' => $data['nim']]);
 
         if (empty($inserted)) {
             $this->flash->addMessage('error', 'Terjadi kesalahan saat menyimpan data.');
 
             return $response->withStatus(500)->withHeader('Location', $this->router->pathFor('home'));
+        }
+
+        $message = urlencode(sprintf('Halo, saya %s (%s). Saya mau konfirmasi pembayaran Expo AMCC, berikut bukti transfernya...', $inserted['nama'], $inserted['nim']));
+
+        $methods = $this->db->get('settings', 'value', ['name' => 'payment_methods']);
+
+        $price = $this->db->get('settings', 'value', ['name' => 'price']);
+
+        $contact = $this->db->get('settings', 'value', ['name' => 'cp_payment']);
+
+        $data = [
+            'nama' => $inserted['nama'],
+            'firstname' => explode(' ', $inserted['nama'])[0],
+            'nim' => $inserted['nim'],
+            'payments' => explode(';', $methods),
+            'amount' => 'Rp' . number_format($price, 0, ',', '.'),
+            'divisi' => $this->getDivisi($inserted['divisi']),
+            'link_konfirmasi' => sprintf('http://wa.me/%s?text=%s', $contact, $message),
+        ];
+
+        $this->view->render($response, 'email.invoice', compact('data'));
+
+        $mailContent = $response->getBody()->__toString();
+        $mailSubject = 'Join Amikom Computer Club';
+        
+        $mail = $this->mailer;
+        $mail->setFrom(getenv('SMTP_FROM_EMAIL'), getenv('SMTP_FROM_NAME'));
+        $mail->addAddress($inserted['email']);
+        $mail->isHTML(true);
+        $mail->Subject = $mailSubject;
+        $mail->Body = $mailContent;
+        
+        try {
+            $mail->send();
+        } catch (Exception $e) {
+            return $response->withJson([
+                'status' => 'error',
+                'message' => $mail->ErrorInfo()
+            ], 500);
         }
 
         $this->flash->addMessage('success', $this->helper->getSettings()['success_message']);
@@ -99,5 +138,25 @@ class HomeAction extends BaseAction
         }
         
         return $data;
+    }
+
+    protected function getDivisi(string $code) : string
+    {
+        switch ($code) {
+            case 'desktop':
+                return 'Desktop Programming';
+            case 'mobile':
+                return 'Mobile Programming';
+            case 'network':
+                return 'Computer Network';
+            case 'web-backend':
+                return 'Web Programming (Backend)';
+            case 'web-frontend':
+                return 'Web Programming (Frontend)';
+            case 'hardware':
+                return 'Hardware Software';
+            default:
+                return 'Tidak dikenali';
+        }
     }
 }
