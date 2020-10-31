@@ -85,13 +85,11 @@ class HomeAction extends BaseAction
             return $response->withStatus(500)->withHeader('Location', $this->router->pathFor('home'));
         }
 
-        $message = urlencode(sprintf('Halo, saya %s (%s). Saya mau konfirmasi pembayaran Expo AMCC, berikut bukti transfernya...', $inserted['nama'], $inserted['nim']));
+        $name = urlencode(sprintf('%s (%s)', $inserted['nama'], $inserted['nim']));
 
         $methods = $this->db->get('settings', 'value', ['name' => 'payment_methods']);
 
         $price = $this->db->get('settings', 'value', ['name' => 'price']);
-
-        $contact = $this->db->get('settings', 'value', ['name' => 'cp_payment']);
 
         $data = [
             'nama' => $inserted['nama'],
@@ -100,7 +98,7 @@ class HomeAction extends BaseAction
             'payments' => explode(';', $methods),
             'amount' => 'Rp' . number_format($price, 0, ',', '.'),
             'divisi' => $this->getDivisi($inserted['divisi']),
-            'link_konfirmasi' => sprintf('http://wa.me/%s?text=%s', $contact, $message),
+            'link_konfirmasi' => getenv('APP_URL') . $this->helper->route('contact.payment') . '?name=' . $name,
         ];
 
         $this->view->render($response, 'email.invoice', compact('data'));

@@ -24,3 +24,4 @@ $app->get('/soon', 'App\Action\HomeAction:soon')->setName('soon');
 $app->get('/', 'App\Action\HomeAction:home')->setName('home')->add($app->getContainer()->get('csrf'));
 $app->post('/', 'App\Action\HomeAction:register')->add($app->getContainer()->get('csrf'))->add('App\Middlewares\CheckRegisteredMiddleware:run');
 $app->get('/e-nota/{id}', 'App\Action\NotaAction:view')->setName('nota.view');
+$app->get('/contact/payment', 'App\Action\ContactAction:payment')->setName('contact.payment');

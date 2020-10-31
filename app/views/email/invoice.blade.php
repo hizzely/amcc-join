@@ -371,11 +371,9 @@
                     <p style="color: #000; text-align: justify;">
                       Hai <b>{{ $data['firstname'] }}</b>! Terima kasih kamu telah memilih divisi <b>{{ $data['divisi'] }}</b>. Tinggal satu langkah lagi! kamu perlu melunasi biaya pendaftaran sebesar <b>{{ $data['amount'] }}</b>
                       dengan melakukan <b>transfer ke salah satu rekening</b> berikut:<br><br>
-                        <?php
-                            foreach ($data['payments'] as $method) {
-                                echo "- {$method} <br>";
-                            }
-                        ?>
+                        @foreach ($data['payments'] as $method)
+                            - {{ $method }} <br>
+                        @endforeach
                       <br>Segera setelah kamu selesai transfer, kamu perlu melakukan <b>konfirmasi pembayaran</b>
                       dengan mengirimkan bukti transfer, bisa <b>berupa foto atau screenshot</b>. Kamu bisa melakukannya
                       lewat tombol konfirmasi dibawah ini, yang akan mengarahkan kamu ke <b>chat WhatsApp</b>.
