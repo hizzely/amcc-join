@@ -21,6 +21,13 @@
           </div>
 
           <div class="form-group row">
+            <label for="admin_notice" class="col-sm-2 col-form-label">Admin Notice</label>
+            <div class="col-sm-10">
+              <textarea name="admin_notice" id="admin_notice" class="form-control" rows="3">{!! $settings['admin_notice'] !!}</textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
             <label for="success_message" class="col-sm-2 col-form-label">Pendaftaran Sukses</label>
             <div class="col-sm-10">
               <textarea name="success_message" id="success_message" class="form-control" rows="2">{!! $settings['success_message'] !!}</textarea>
@@ -28,28 +35,63 @@
           </div>
 
           <br>
-          <h3>Tanggal Pendaftaran</h3>
+          <h3>Pendaftaran</h3>
           <hr>
 
           <div class="form-group row">
-            <label for="date_open" class="col-sm-2 col-form-label">Mulai Dibuka Pada</label>
+            <label for="price" class="col-sm-2 col-form-label">Biaya</label>
             <div class="col-sm-10">
-              <textarea name="date_open" id="date_open" class="form-control" rows="2">{!! $settings['date_open'] !!}</textarea>
+              <input name="price" type="number" min="0" id="price" class="form-control" value="{!! $settings['price'] !!}">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="registration_code" class="col-sm-2 col-form-label">No. Registrasi Awal</label>
+            <div class="col-sm-10">
+              <input name="registration_code" type="number" min="0" id="registration_code" class="form-control" value="{!! $settings['registration_code'] !!}">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="date_open" class="col-sm-2 col-form-label">Dibuka Pada</label>
+            <div class="col-sm-10">
+              <input name="date_open" type="datetime" id="date_open" class="form-control" value="{!! $settings['date_open'] !!}">
             </div>
           </div>
 
           <div class="form-group row">
             <label for="date_closed" class="col-sm-2 col-form-label">Ditutup Pada</label>
             <div class="col-sm-10">
-              <textarea name="date_closed" id="date_closed" class="form-control" rows="2">{!! $settings['date_closed'] !!}</textarea>
+              <input name="date_closed" type="datetime" id="date_closed" class="form-control" value="{!! $settings['date_closed'] !!}">
             </div>
           </div>
+
+          <br>
+          <h3>Pembayaran</h3>
+          <hr>
+
+          <div class="form-group row">
+            <label for="cp_payment" class="col-sm-2 col-form-label">CP WA</label>
+            <div class="col-sm-10">
+              <input name="cp_payment" type="text" id="cp_payment" class="form-control" value="{!! $settings['cp_payment'] !!}">
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="payment_methods" class="col-sm-2 col-form-label">Metode Pembayaran <small>(Semicolon separated)</small></label>
+            <div class="col-sm-10">
+              <textarea name="payment_methods" id="payment_methods" class="form-control" rows="3">{!! $settings['payment_methods'] !!}</textarea>
+            </div>
+          </div>
+
+          <br><hr>
 
           <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
               <button type="submit" class="btn btn-success">Simpan Perubahan</button>
             </div>
           </div>
+          <br>
         </fieldset>
       </form>
     </div>
