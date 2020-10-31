@@ -95,7 +95,7 @@ class MemberAction extends BaseAction
 
                 $this->mailer
                     ->from(getenv('SMTP_FROM_EMAIL'))
-                    ->to($inserted['email'])
+                    ->to($member['email'])
                     ->subject('Join Amikom Computer Club')
                     ->html($response->getBody()->__toString())
                     ->send();
