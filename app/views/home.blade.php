@@ -59,7 +59,7 @@
               <label for="nim" class="col-sm-3 col-form-label">NIM</label>
               <div class="col-sm-9">
                 <!-- <input class="form-control" type="text" id="nim" name="nim" placeholder="Contoh: 19.11.0000" required data-parsley-remote="http://amikom-dispatch.rizqy.me/mahasiswa/{value}" data-parsley-group="nim"> -->
-                <input class="form-control" type="text" id="nim" name="nim" placeholder="Contoh: 19.11.0000" required data-parsley-group="nim">
+                <input class="form-control" type="text" id="nim" name="nim" placeholder="Contoh: 20.11.2020" required data-parsley-group="nim">
               </div>
             </div>
             <div class="form-group row">
@@ -77,13 +77,13 @@
             <div class="form-group row">
               <label for="phone" class="col-sm-3 col-form-label">No. Handphone</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" id="phone" name="phone" placeholder="Contoh: 085234567890" required data-parsley-type="number">
+                <input class="form-control" type="number" min="0" id="phone" name="phone" placeholder="Contoh: 085234567890" required data-parsley-type="number">
               </div>
             </div>
             <div class="form-group row">
               <label for="email" class="col-sm-3 col-form-label">E-mail</label>
               <div class="col-sm-9">
-                <input class="form-control" type="email" id="email" name="email" placeholder="E-mail kamu">
+                <input class="form-control" type="email" id="email" name="email" placeholder="E-mail kamu" required>
               </div>
             </div>
             <div class="form-group row">

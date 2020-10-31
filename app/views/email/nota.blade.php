@@ -393,8 +393,8 @@
 
       <div style="padding: 40px; background: #0799da; color: #fff;">
         <h3 class="heading" style="font-size: 24px; color: #fff;">Explore AMCC</h3>
-        <a href="https://amcc.or.id" target="_blank" style="padding: 12px;">WEBSITE</a>
-        <a href="https://instagram.com/amccamikom" target="_blank" style="padding: 12px;">INSTAGRAM</a>
+        <a href="https://amcc.or.id" target="_blank" style="padding: 12px; color: #fff;">WEBSITE</a>
+        <a href="https://instagram.com/amccamikom" target="_blank" style="padding: 12px; color: #fff;">INSTAGRAM</a>
       </div>
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
         <tr>
