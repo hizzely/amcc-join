@@ -72,7 +72,7 @@
       var flipdown = new FlipDown(futureDate)
         .start()
         .ifEnded(() => {
-          console.log('The countdown has ended!');
+          window.location = '/'
         });
     });
   </script>
