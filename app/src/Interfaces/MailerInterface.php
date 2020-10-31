@@ -4,7 +4,7 @@ namespace App\Interfaces;
 
 interface MailerInterface
 {
-    function from(string $email, string $name = null) : self;
+    function from(string $email) : self;
     function to(string $value) : self;
     function subject(string $value) : self;
     function text(string $value) : self;

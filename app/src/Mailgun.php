@@ -20,7 +20,7 @@ class Mailgun implements MailerInterface
         $this->transporter = $ci->get('mailgun');
     }
 
-    public function from(string $email, string $name = null) : self
+    public function from(string $email) : self
     {
         $this->data['from'] = $email;
 

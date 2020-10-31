@@ -16,11 +16,9 @@ class PhpMailer implements MailerInterface
         $this->transporter = $ci->get('phpmailer');
     }
 
-    public function from(string $email, string $name = null) : self
+    public function from(string $email) : self
     {
         $this->data['from'] = $email;
-        
-        $this->data['fromName'] = $name;
 
         return $this;
     }
@@ -55,7 +53,7 @@ class PhpMailer implements MailerInterface
 
     public function send()
     {
-        $this->transporter->setFrom($this->data['from'], $this->data['fromName']);
+        $this->transporter->setFrom($this->data['from']);
         
         $this->transporter->addAddress($this->data['to']);
 
