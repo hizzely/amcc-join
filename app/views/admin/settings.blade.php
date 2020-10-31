@@ -71,9 +71,9 @@
           <hr>
 
           <div class="form-group row">
-            <label for="cp_payment" class="col-sm-2 col-form-label">CP WA</label>
+            <label for="link_konfirmasi" class="col-sm-2 col-form-label">Link Konfirmasi</label>
             <div class="col-sm-10">
-              <input name="cp_payment" type="text" id="cp_payment" class="form-control" value="{!! $settings['cp_payment'] !!}">
+              <input name="link_konfirmasi" type="text" id="link_konfirmasi" class="form-control" value="{!! $settings['link_konfirmasi'] !!}">
             </div>
           </div>
           

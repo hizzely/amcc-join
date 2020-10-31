@@ -88,6 +88,7 @@ class HomeAction extends BaseAction
         $name = urlencode(sprintf('%s (%s)', $inserted['nama'], $inserted['nim']));
         $methods = $this->db->get('settings', 'value', ['name' => 'payment_methods']);
         $price = $this->db->get('settings', 'value', ['name' => 'price']);
+        $confirmLink = $this->db->get('settings', 'value', ['name' => 'link_konfirmasi']);
         $data = [
             'nama' => $inserted['nama'],
             'firstname' => explode(' ', $inserted['nama'])[0],
@@ -95,7 +96,7 @@ class HomeAction extends BaseAction
             'payments' => explode(';', $methods),
             'amount' => 'Rp' . number_format($price, 0, ',', '.'),
             'divisi' => $this->getDivisi($inserted['divisi']),
-            'link_konfirmasi' => getenv('APP_URL') . $this->helper->route('contact.payment') . '?name=' . $name,
+            'link_konfirmasi' => $confirmLink,
         ];
 
         $this->view->render($response, 'email.invoice', compact('data'));
