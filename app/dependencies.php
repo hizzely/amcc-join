@@ -1,5 +1,6 @@
 <?php
 
+use App\Interfaces\MailerInterface;
 use Medoo\Medoo;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -53,7 +54,7 @@ $container['csrf'] = function ($c) {
 };
 
 // PHPMailer
-$container['mailer'] = function ($c) {
+$container['phpmailer'] = function ($c) {
     $mailer = new PHPMailer(true);
     //$mailer->SMTPDebug = SMTP::DEBUG_SERVER;
     $mailer->isSMTP();
@@ -65,6 +66,11 @@ $container['mailer'] = function ($c) {
     $mailer->Port       = getenv('SMTP_PORT');
     
     return $mailer;
+};
+
+// Mailgun
+$container['mailgun'] = function ($c) {
+    return \Mailgun\Mailgun::create(getenv('MAILGUN_SECRET'));
 };
 
 // -----------------------------------------------------------------------------
@@ -98,6 +104,16 @@ $container[App\Middlewares\RedirectIfAuthed::class] = function ($c) {
 
 $container[App\Middlewares\CheckRegisteredMiddleware::class] = function ($c) {
     return new App\Middlewares\CheckRegisteredMiddleware($c);
+};
+
+$container[MailerInterface::class] = function ($c) {
+    if (getenv('MAIL_DRIVER') == 'phpmailer') {
+        return new \App\PhpMailer($c);
+    }
+
+    if (getenv('MAIL_DRIVER') == 'mailgun') {
+        return new \App\Mailgun($c);
+    }
 };
 
 // $container[App\Action\HomeAction::class] = function ($c) {
