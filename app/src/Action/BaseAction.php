@@ -1,6 +1,7 @@
 <?php
 namespace App\Action;
 
+use App\Interfaces\MailerInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -27,6 +28,6 @@ class BaseAction
         $this->logger = $ci->get('logger');
         $this->router = $ci->get('router');
         $this->view   = $ci->get('view');
-        $this->mailer = $ci->get('mailer');
+        $this->mailer = $ci->get(MailerInterface::class);
     }
 }

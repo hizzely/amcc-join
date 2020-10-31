@@ -92,25 +92,13 @@ class MemberAction extends BaseAction
                 ];
         
                 $this->view->render($response, 'email.nota', compact('data'));
-                $mailContent = $response->getBody()->__toString();
-                $mailSubject = 'Join Amikom Computer Club';
-        
-                $mail = $this->mailer;
-                $mail->setFrom(getenv('SMTP_FROM_EMAIL'), getenv('SMTP_FROM_NAME'));
-                $mail->addAddress($member['email']);
-                $mail->isHTML(true);
-                $mail->Subject = $mailSubject;
-                $mail->Body = $mailContent;
-                
-                try {
-                    $mail->send();
-                    $this->db->update('nota', ['notified'  => 1], ['nim' => $data['nim']]);
-                } catch (Exception $e) {
-                    return $response->withJson([
-                        'status' => 'error',
-                        'message' => $mail->ErrorInfo()
-                    ], 500);
-                }
+
+                $this->mailer
+                    ->from(getenv('SMTP_FROM_EMAIL'))
+                    ->to($inserted['email'])
+                    ->subject('Join Amikom Computer Club')
+                    ->html($response->getBody()->__toString())
+                    ->send();
             }
         } else {
             $this->db->delete('nota', ['nim' => $data['nim']]);

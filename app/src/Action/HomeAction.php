@@ -86,11 +86,8 @@ class HomeAction extends BaseAction
         }
 
         $name = urlencode(sprintf('%s (%s)', $inserted['nama'], $inserted['nim']));
-
         $methods = $this->db->get('settings', 'value', ['name' => 'payment_methods']);
-
         $price = $this->db->get('settings', 'value', ['name' => 'price']);
-
         $data = [
             'nama' => $inserted['nama'],
             'firstname' => explode(' ', $inserted['nama'])[0],
@@ -103,24 +100,12 @@ class HomeAction extends BaseAction
 
         $this->view->render($response, 'email.invoice', compact('data'));
 
-        $mailContent = $response->getBody()->__toString();
-        $mailSubject = 'Join Amikom Computer Club';
-        
-        $mail = $this->mailer;
-        $mail->setFrom(getenv('SMTP_FROM_EMAIL'), getenv('SMTP_FROM_NAME'));
-        $mail->addAddress($inserted['email']);
-        $mail->isHTML(true);
-        $mail->Subject = $mailSubject;
-        $mail->Body = $mailContent;
-        
-        try {
-            $mail->send();
-        } catch (Exception $e) {
-            return $response->withJson([
-                'status' => 'error',
-                'message' => $mail->ErrorInfo()
-            ], 500);
-        }
+        $this->mailer
+            ->from(getenv('SMTP_FROM_EMAIL'))
+            ->to($inserted['email'])
+            ->subject('Join Amikom Computer Club')
+            ->html($response->getBody()->__toString())
+            ->send();
 
         $this->flash->addMessage('success', $this->helper->getSettings()['success_message']);
 
