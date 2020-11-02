@@ -374,6 +374,7 @@
                         @foreach ($data['payments'] as $method)
                             - {{ $method }} <br>
                         @endforeach
+                      <br>Mohon <b>sertakan NIM</b> lengkap kamu tanpa titik (contoh: 20112020) <b>di Nomor Referensi</b> nya saat transfer.<br>
                       <br>Segera setelah kamu selesai transfer kamu perlu melakukan <b>konfirmasi pembayaran
                       dengan mengirimkan bukti transfer</b>, bisa <b>berupa foto atau screenshot</b>. Kamu bisa melakukannya
                       lewat tombol konfirmasi dibawah ini.
