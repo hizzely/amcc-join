@@ -23,6 +23,7 @@
           </h1>
 
           <ul class="socials hidden-sm-down">
+            <li><a href="/faqs">FAQ</a></li>
             <li><a href="http://amcc.or.id/"><i class="ion-ios-world-outline"></i> amcc.or.id</a></li>
             <li><a href="https://www.facebook.com/AmikomComputerClub/"><i class="ion-social-facebook"></i>AmikomComputerClub</a></li>
             <li><a href="https://instagram.com/amccamikom/"><i class="ion-social-instagram-outline"></i> @amccamikom</a></li>
@@ -129,6 +130,7 @@
 
       <div class="footer-sm col-xs-12 hidden-md-up">
         <ul class="socials">
+          <li><a href="/faqs">FAQ</a></li>
           <li><a href="http://amcc.or.id/"><i class="ion-ios-world-outline"></i> amcc.or.id</a></li>
           <li><a href="https://www.facebook.com/AmikomComputerClub/"><i class="ion-social-facebook"></i>AmikomComputerClub</a></li>
           <li><a href="https://instagram.com/amccamikom/"><i class="ion-social-instagram-outline"></i> @amccamikom</a></li>

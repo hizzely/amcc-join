@@ -23,6 +23,7 @@
       <div class="collapse navbar-collapse" id="top-navbar">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item"><a class="nav-link" href="{{ $helper->route('admin') }}">Member <span class="sr-only">(current)</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ $helper->route('admin.faq') }}">FAQ</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ $helper->route('admin.stats') }}">Statistik</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ $helper->route('admin.report') }}">Laporan Keuangan</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ $helper->route('admin.settings') }}">Pengaturan</a></li>

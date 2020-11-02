@@ -35,6 +35,13 @@ class HomeAction extends BaseAction
         return $response;
     }
 
+    public function faqs(Request $request, Response $response)
+    {
+        $faqs = $this->db->select('faqs', '*', ['published' => 1]);
+
+        $this->view->render($response, 'faqs', compact('faqs'));
+    }
+
     public function soon(Request $request, Response $response)
     {
         $settings = $this->getSettingsData();
