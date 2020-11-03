@@ -62,10 +62,41 @@ class MemberAction extends BaseAction
             $data['nota-notify'] = 0;
         }
 
+        if (!array_key_exists('invoice-notify', $data)) {
+            $data['invoice-notify'] = 0;
+        }
+
         $this->db->update('member', [
             'noReg'  => $data['noReg'],
             'status' => (int) $data['status']
         ], ['nim' => $data['nim']]);
+
+        if ($data['invoice-notify']) {
+            $methods = $this->db->get('settings', 'value', ['name' => 'payment_methods']);
+
+            $price = $this->db->get('settings', 'value', ['name' => 'price']);
+
+            $confirmLink = $this->db->get('settings', 'value', ['name' => 'link_konfirmasi']);
+
+            $payloadInvoice = [
+                'nama' => $member['nama'],
+                'firstname' => explode(' ', $member['nama'])[0],
+                'nim' => $member['nim'],
+                'payments' => explode(';', $methods),
+                'amount' => 'Rp' . number_format($price, 0, ',', '.'),
+                'divisi' => $this->getDivisi($member['divisi']),
+                'link_konfirmasi' => $confirmLink,
+            ];
+
+            $this->view->render($response, 'email.invoice', ['data' => $payloadInvoice]);
+
+            $this->mailer
+                ->from(getenv('SMTP_FROM_EMAIL'))
+                ->to($member['email'])
+                ->subject('Join Amikom Computer Club')
+                ->html($response->getBody()->__toString())
+                ->send();
+        }
         
         if ($data['status']) {
             $inserted = $this->db->get('nota', 'hash', ['nim' => $data['nim']]);
@@ -130,5 +161,25 @@ class MemberAction extends BaseAction
             'status' => 'ok',
             'message' => 'Data member berhasil dihapus.'
         ]);
+    }
+
+    protected function getDivisi(string $code) : string
+    {
+        switch ($code) {
+            case 'desktop':
+                return 'Desktop Programming';
+            case 'mobile':
+                return 'Mobile Programming';
+            case 'network':
+                return 'Computer Network';
+            case 'web-backend':
+                return 'Web Programming (Backend)';
+            case 'web-frontend':
+                return 'Web Programming (Frontend)';
+            case 'hardware':
+                return 'Hardware Software';
+            default:
+                return 'Tidak dikenali';
+        }
     }
 }

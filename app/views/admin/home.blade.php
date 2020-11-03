@@ -71,6 +71,13 @@
                   <span class="custom-control-description">Kirim Email E-Nota</span>
                 </label>
               </div>
+              <div class="form-check">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input member-nota-notify" name="invoice-notify" value="1">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">Kirim Email Invoice</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
